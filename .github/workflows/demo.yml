@@ -3,6 +3,10 @@ name: Demo test
 on:
   workflow_dispatch:
 
+permissions:
+  pages: write
+  actions: write
+
 jobs:
   test:
     runs-on: ubuntu-latest

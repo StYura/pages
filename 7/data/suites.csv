@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Wed Dec 06 12:48:13 GMT 2023","Wed Dec 06 12:48:18 GMT 2023","4553","Default Suite","demo","com.example.demo.MainPageTest","com.example.demo.MainPageTest","search","search",""
+"passed","Wed Dec 06 12:48:18 GMT 2023","Wed Dec 06 12:48:19 GMT 2023","77","Default Suite","demo","com.example.demo.MainPageTest","com.example.demo.MainPageTest","toolsMenu","toolsMenu",""
+"failed","Wed Dec 06 12:48:08 GMT 2023","Wed Dec 06 12:48:13 GMT 2023","4673","Default Suite","demo","com.example.demo.MainPageTest","com.example.demo.MainPageTest","navigationToAllTools","navigationToAllTools",""

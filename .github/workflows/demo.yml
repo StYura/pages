@@ -12,9 +12,9 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
-      - name: Start selenoid
-        uses: Xotabu4/selenoid-github-action@v2
+          java-version: '17'
+#      - name: Start selenoid
+#        uses: Xotabu4/selenoid-github-action@v2
       - run: mvn clean test
       - name: Generate allure report
         uses: simple-elf/allure-report-action@master
@@ -27,7 +27,7 @@ jobs:
           allure_history: allure-history
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages

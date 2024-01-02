@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Tue Jan 02 13:13:51 GMT 2024","Tue Jan 02 13:13:51 GMT 2024","12","Dummy Test Suite","Order management tests","com.example.demo.DummyTest","com.example.demo.DummyTest","test2","test2",""
+"passed","Tue Jan 02 13:13:51 GMT 2024","Tue Jan 02 13:13:51 GMT 2024","149","Dummy Test Suite","Order management tests","com.example.demo.DummyTest","com.example.demo.DummyTest","test","test",""

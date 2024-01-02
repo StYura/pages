@@ -34,4 +34,24 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
-
+          destination_dir: subdir
+#      - name: Notify about smoke test fail on Slack
+#        id: slack
+#        uses: slackapi/slack-github-action@v1.18.0
+#        with:
+#        # For posting a rich message using Block Kit
+#          payload: |
+#              {
+#                "blocks": [
+#                  {
+#                    "type": "section",
+#                    "text": {
+#                      "type": "mrkdwn",
+#                      "text": "Smoke test is failed\nLatest report can be found here https://special-eureka-17b44353.pages.github.io/"
+#                    }
+#                  }
+#                ]
+#              }
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

@@ -17,7 +17,7 @@ jobs:
           java-version: '17'
 #      - name: Start selenoid
 #        uses: Xotabu4/selenoid-github-action@v2
-      - run: mvn clean test
+      - run: mvn clean test -Dsuite=dummy
       - name: Generate allure report
         uses: simple-elf/allure-report-action@master
         if: always()

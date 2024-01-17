@@ -21,7 +21,8 @@ jobs:
         id: tests
         run: |
           {
-            echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)'
+             mvn clean test -Dsuite=dummy 2>&1 | tee "$GITHUB_WORKSPACE/test_output.log"
+             echo 'test_output=$(grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" "$GITHUB_WORKSPACE/test_output.log" | head -n 1)'
           } | tee -a "$GITHUB_OUTPUT"
 #      - name: Generate Test Report
 #        if: success() || failure()
@@ -36,6 +37,9 @@ jobs:
         if: always()
         run: |
           echo ${{join(steps.tests.outputs.*, '\n')}}
+      - name: Clean up
+        run: rm "$GITHUB_WORKSPACE/test_output.log"
+        if: success()
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

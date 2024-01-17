@@ -35,7 +35,7 @@ jobs:
 #          } >> "$GITHUB_ENV"
       - name: Generate Test Report
         if: success() || failure()
-        id: tests
+        id: tests_rep
         run: |
           echo "$test_output"
           echo "Test_Suites=$(echo "$test_output" | grep 'Tests run:')" >> $GITHUB_OUTPUT
@@ -44,7 +44,7 @@ jobs:
       - name: Check output
         if: always()
         run: |
-          echo ${{ toJson(steps.tests.outputs) }}
+          echo ${{ toJson(steps.tests_rep.outputs) }}
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

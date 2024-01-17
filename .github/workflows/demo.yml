@@ -20,10 +20,13 @@ jobs:
       - name: Execute test
         id: tests
         run: |
-          {
-             mvn clean test -Dsuite=dummy 2>&1 | tee "$GITHUB_WORKSPACE/test_output.log"
-             echo 'test_output=$(grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" "$GITHUB_WORKSPACE/test_output.log" | head -n 1)'
-          } | tee -a "$GITHUB_OUTPUT"
+           {
+           echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)'
+           } | tee -a "$GITHUB_OUTPUT"
+#          {
+#             mvn clean test -Dsuite=dummy 2>&1 | tee "$GITHUB_WORKSPACE/test_output.log"
+#             echo 'test_output=$(grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" "$GITHUB_WORKSPACE/test_output.log" | head -n 1)'
+#          } | tee -a "$GITHUB_OUTPUT"
 #      - name: Generate Test Report
 #        if: success() || failure()
 #        id: tests_rep

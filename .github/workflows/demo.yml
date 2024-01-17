@@ -21,8 +21,7 @@ jobs:
         id: tests
         run: |
           {
-               echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 
-                | grep -o "Tests run:.*Time elapsed:.*$" | head -n 1)'
+               echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep -o "Tests run:.*Time elapsed:.*$" | head -n 1)'
           } >> "$GITHUB_OUTPUT"
 #      - name: Generate Test Report
 #        if: success() || failure()

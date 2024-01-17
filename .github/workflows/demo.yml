@@ -24,7 +24,7 @@ jobs:
            echo 'test_output<<EOF'
            mvn clean test -Dsuite=dummy 2>&1
            echo EOF
-          } >> "$GITHUB_ENV"
+          } | grep 'Tests run:' >> "$GITHUB_ENV"
 #      - name: Unit Test
 #        id: unit_test
 #        run: |
@@ -39,8 +39,9 @@ jobs:
         run: |
           echo "$test_output"
           echo "Test_Suites=$(echo "$test_output" | grep 'Tests run:')" >> $GITHUB_OUTPUT
-          echo "Test_Cases=$(echo "$test_output" | grep 'Tests:')" >> $GITHUB_OUTPUT
-          echo "Test_Time=$(echo "$test_output" | grep 'Time: ')" >> $GITHUB_OUTPUT
+#          echo "Test_Suites=$(echo "$test_output" | grep 'Tests run:')" >> $GITHUB_OUTPUT
+#          echo "Test_Cases=$(echo "$test_output" | grep 'Tests:')" >> $GITHUB_OUTPUT
+#          echo "Test_Time=$(echo "$test_output" | grep 'Time: ')" >> $GITHUB_OUTPUT
       - name: Check output
         if: always()
         run: |

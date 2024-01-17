@@ -24,7 +24,7 @@ jobs:
            echo 'test_output<<EOF'
            mvn clean test -Dsuite=dummy 2>&1
            echo EOF
-          } | grep 'Tests run:' >> $GITHUB_OUTPUT
+          } | grep 'Tests run:' >> "$GITHUB_OUTPUT"
 #      - name: Unit Test
 #        id: unit_test
 #        run: |

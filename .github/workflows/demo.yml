@@ -35,7 +35,7 @@ jobs:
       - name: Check output
         if: always()
         run: |
-          echo ${{join(steps.tests.outputs.*, '\n')}}
+          echo ${{steps.tests.outputs}}
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

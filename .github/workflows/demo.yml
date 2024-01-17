@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
 
 permissions: write-all
-
+env:
+  GITHUB_ENV
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,6 +35,9 @@ jobs:
           echo "Test_Suites=$(echo "$test_output" | grep 'Tests run:')" >> $GITHUB_OUTPUT
           echo "Test_Cases=$(echo "$test_output" | grep 'Tests:')" >> $GITHUB_OUTPUT
           echo "Test_Time=$(echo "$test_output" | grep 'Time: ')" >> $GITHUB_OUTPUT
+      - name: Check output
+        run: |
+          echo ${{ toJson(steps.unit_test_report.outputs) }}
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

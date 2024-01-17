@@ -17,18 +17,25 @@ jobs:
           java-version: '17'
 #      - name: Start selenoid
 #        uses: Xotabu4/selenoid-github-action@v2
-      - run: mvn clean test -Dsuite=dummy
-      - name: Unit Test
-        id: unit_test
+      - name: Execute test
+        id: tests
         run: |
           {
-            echo 'test_output<<EOF'
-            yarn test 2>&1
-            echo EOF
-          } >> "$GITHUB_ENV"       
-      - name: Generate Unit Test Report
+           echo 'test_output<<EOF'
+           mvn clean test -Dsuite=dummy 2>&1
+           echo EOF
+          } >> "$GITHUB_ENV"
+#      - name: Unit Test
+#        id: unit_test
+#        run: |
+#          {
+#            echo 'test_output<<EOF'
+#            yarn test 2>&1
+#            echo EOF
+#          } >> "$GITHUB_ENV"
+      - name: Generate Test Report
         if: success() || failure()
-        id: unit_test_report
+        id: tests
         run: |
           echo "$test_output"
           echo "Test_Suites=$(echo "$test_output" | grep 'Tests run:')" >> $GITHUB_OUTPUT
@@ -37,7 +44,7 @@ jobs:
       - name: Check output
         if: always()
         run: |
-          echo ${{ toJson(steps.unit_test_report.outputs) }}
+          echo ${{ toJson(steps.tests.outputs) }}
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

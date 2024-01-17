@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
 
 permissions: write-all
-env:
-  GITHUB_ENV
+
 jobs:
   test:
     runs-on: ubuntu-latest

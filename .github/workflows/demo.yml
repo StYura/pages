@@ -21,7 +21,7 @@ jobs:
         id: tests
         run: |
           {
-               echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep "Tests run:")'
+               echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep -o "Tests run:.*$")'
           } >> "$GITHUB_OUTPUT"
 #      - name: Generate Test Report
 #        if: success() || failure()
@@ -35,7 +35,7 @@ jobs:
       - name: Check output
         if: always()
         run: |
-          echo ${{steps.tests.outputs}}
+          echo ${{join(steps.tests.outputs.*, '\n')}}
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

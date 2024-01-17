@@ -21,11 +21,8 @@ jobs:
         id: tests
         run: |
           {
-           echo 'test_output<<EOF'
-           mvn clean test -Dsuite=dummy 2>&1
-           echo EOF
+               echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1 | grep "Tests run:")'
           } >> "$GITHUB_OUTPUT"
-          printenv GITHUB_OUTPUT
 #      - name: Generate Test Report
 #        if: success() || failure()
 #        id: tests_rep

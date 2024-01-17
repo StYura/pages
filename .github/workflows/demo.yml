@@ -35,6 +35,7 @@ jobs:
           echo "Test_Cases=$(echo "$test_output" | grep 'Tests:')" >> $GITHUB_OUTPUT
           echo "Test_Time=$(echo "$test_output" | grep 'Time: ')" >> $GITHUB_OUTPUT
       - name: Check output
+        if: always()
         run: |
           echo ${{ toJson(steps.unit_test_report.outputs) }}
 #      - name: Generate allure report

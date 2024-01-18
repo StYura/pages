@@ -22,19 +22,23 @@ jobs:
         run: |
           {
             echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1)'
-            echo "$test_output" > "$GITHUB_WORKSPACE/test_output.log"
           } >> "$GITHUB_OUTPUT"
+            
 
-      - name: Debug Workspace Contents
-        run: |
-              ls -R "$GITHUB_WORKSPACE"
-              cat $GITHUB_WORKSPACE/test_output.log
+
       - name: Extract test results
         id: extract_results
         run: |
           tests_run_line=$(echo "${{ steps.tests.outputs.test_output }}" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1) >> "$GITHUB_OUTPUT"
           echo "tests_run_line=$tests_run_line" >> "$GITHUB_OUTPUT"
-#      - name: Generate Test Report
+          echo "${{ steps.tests.outputs.test_output }}" > "$GITHUB_WORKSPACE/test_output.log"
+
+      - name: Debug Workspace Contents
+        run: |
+          ls -R "$GITHUB_WORKSPACE"
+          cat $GITHUB_WORKSPACE/test_output.log
+
+      #      - name: Generate Test Report
 #        if: success() || failure()
 #        id: tests_rep
 #        run: |

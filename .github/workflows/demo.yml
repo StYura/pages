@@ -27,6 +27,7 @@ jobs:
       - name: Extract test results
         id: extract_results
         run: |
+          echo "$test_output"
           tests_run_line=$(echo "$test_output" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)
           echo "$tests_run_line"
 #      - name: Generate Test Report

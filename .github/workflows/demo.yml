@@ -20,19 +20,15 @@ jobs:
       - name: Execute test
         id: tests
         run: |
-          test_output=$(mvn clean test -Dsuite=dummy 2>&1)
-          echo "TEST_OUTPUT=${test_output}" >> "$GITHUB_WORKSPACE/test_output.env"
-          echo "$test_output" > "$GITHUB_WORKSPACE/test_output.log"
-        shell: bash
+          {
+            echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1)'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Extract test results
         id: extract_results
         run: |
-          source "$GITHUB_WORKSPACE/test_output.log"
-          tests_run_line=$(echo "$TEST_OUTPUT" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1 || true)
-          echo "::set-output name=tests_run_line::$tests_run_line"
-        shell: bash
-        continue-on-error: true
+          tests_run_line=$(echo "$test_output" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)
+          echo "$tests_run_line"
 #      - name: Generate Test Report
 #        if: success() || failure()
 #        id: tests_rep

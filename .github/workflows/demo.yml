@@ -24,6 +24,7 @@ jobs:
             echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1)'
           } >> "$GITHUB_OUTPUT"
           echo "${{ steps.tests.outputs.test_output }}"
+          echo "$test_output" > "$GITHUB_WORKSPACE/test_output.log"
 
       - name: Extract test results
         id: extract_results
@@ -43,11 +44,16 @@ jobs:
         if: success()
         run: |
              echo "${{ steps.extract_results.outputs.tests_run_line }}"
-#      - name: Clean up
-#        run:
-#             |
-#            rm "$GITHUB_WORKSPACE/test_output.log"
-#            rm "$GITHUB_WORKSPACE/test_output.env"
+
+      - name: Publish test output as artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: test-output
+            path: "$GITHUB_WORKSPACE/test_output.log"
+      - name: Clean up
+        run:
+             |
+            rm "$GITHUB_WORKSPACE/test_output.log"
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

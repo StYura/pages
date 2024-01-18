@@ -23,13 +23,12 @@ jobs:
           {
             echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1)'
           } >> "$GITHUB_OUTPUT"
-
+          echo "$test_output"
       - name: Extract test results
         id: extract_results
         run: |
-          echo "${{ steps.tests.outputs.test_output }}"
-          tests_run_line=$(echo "${{ steps.tests.outputs.test_output }}" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)
-          echo "$tests_run_line"
+          tests_run_line=$(echo "${{ steps.tests.outputs.test_output }}" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1) >> "$GITHUB_OUTPUT"
+#          echo "$tests_run_line" >> "$GITHUB_OUTPUT"
 #      - name: Generate Test Report
 #        if: success() || failure()
 #        id: tests_rep
@@ -43,11 +42,11 @@ jobs:
         if: success()
         run: |
              echo "${{ steps.extract_results.outputs.tests_run_line }}"
-      - name: Clean up
-        run:
-             |
-            rm "$GITHUB_WORKSPACE/test_output.log"
-            rm "$GITHUB_WORKSPACE/test_output.env"
+#      - name: Clean up
+#        run:
+#             |
+#            rm "$GITHUB_WORKSPACE/test_output.log"
+#            rm "$GITHUB_WORKSPACE/test_output.env"
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

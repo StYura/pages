@@ -28,7 +28,7 @@ jobs:
       - name: Extract test results
         id: extract_results
         run: |
-            tests_run_line=$(echo "$test_output" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)
+            tests_run_line=$(echo "${{ steps.tests.outputs.test_output }}" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1)
             echo "::set-output name=tests_run_line::$tests_run_line"
         shell: bash
         continue-on-error: true

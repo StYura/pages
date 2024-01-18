@@ -44,7 +44,7 @@ jobs:
       - name: Check output
         if: always()
         run: |
-             echo "${{tests_run_line}}"
+             echo "${{ steps.extract_results.outputs.tests_run_line }}"
       - name: Clean up
         run: rm "$GITHUB_WORKSPACE/test_output.log"
         if: success()

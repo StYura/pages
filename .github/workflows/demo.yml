@@ -53,10 +53,10 @@ jobs:
             name: stack trace
             path: "$GITHUB_WORKSPACE/test_output.log"
 
-      - name: Clean up
-        run:
-             |
-            rm "$GITHUB_WORKSPACE/test_output.log"
+#      - name: Clean up
+#        run:
+#             |
+#            rm "$GITHUB_WORKSPACE/test_output.log"
 #      - name: Generate allure report
 #        uses: simple-elf/allure-report-action@master
 #        if: always()

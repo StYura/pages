@@ -22,8 +22,8 @@ jobs:
         run: |
           {
             echo 'test_output=$(mvn clean test -Dsuite=dummy 2>&1)'
+            echo "$test_output" > "$GITHUB_WORKSPACE/test_output.log"
           } >> "$GITHUB_OUTPUT"
-          echo "$test_output" > "$GITHUB_WORKSPACE/test_output.log"
 
       - name: Debug Workspace Contents
         run: |

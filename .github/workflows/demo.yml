@@ -26,8 +26,9 @@ jobs:
           echo "test_output=$test_output" > "$GITHUB_WORKSPACE/test_output.log"
 
       - name: Debug Workspace Contents
-        run: ls -R "$GITHUB_WORKSPACE"
-
+        run: |
+              ls -R "$GITHUB_WORKSPACE"
+              cat $GITHUB_WORKSPACE/test_output.log
       - name: Extract test results
         id: extract_results
         run: |

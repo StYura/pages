@@ -28,7 +28,7 @@ jobs:
       - name: Extract test results
         id: extract_results
         run: |
-          source "$GITHUB_WORKSPACE/test_output.env"
+          source "$GITHUB_WORKSPACE/test_output.log"
           tests_run_line=$(echo "$TEST_OUTPUT" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1 || true)
           echo "::set-output name=tests_run_line::$tests_run_line"
         shell: bash

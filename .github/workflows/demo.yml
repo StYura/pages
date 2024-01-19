@@ -31,7 +31,7 @@ jobs:
         run: |
           tests_run_line=$(echo "${{ steps.tests.outputs.test_output }}" | grep -o "Tests run: [0-9]*, Failures: [0-9]*, Errors: [0-9]*, Skipped: [0-9]*" | head -n 1) >> "$GITHUB_OUTPUT"
           echo "tests_run_line=$tests_run_line" >> "$GITHUB_OUTPUT"
-          echo "${{ steps.tests.outputs.test_output }}" > "$GITHUB_WORKSPACE/test_output.log"
+          stack_trace=$(echo "${{ steps.tests.outputs.test_output }}") >> "$GITHUB_WORKSPACE/test_output.log"
 
       - name: Debug Workspace Contents
         run: |

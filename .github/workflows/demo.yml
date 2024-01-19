@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: stack trace
-            path: $GITHUB_WORKSPACE/test_output.log
+            path: test_output.log
 
 #      - name: Clean up
 #        run:
